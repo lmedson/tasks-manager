@@ -1,11 +1,9 @@
-// Update with your config settings.
-
 module.exports = {
-  client: 'pg',
+  client: '',
   connection: {
-    database: 'myproject',
-    user: 'myprojectuser',
-    password: 'password',
+    database: '',
+    user: '',
+    password: '',
   },
   pool: {
     min: 2,
