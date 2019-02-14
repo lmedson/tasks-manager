@@ -3,7 +3,7 @@ const graphqlHTTP = require('express-graphql');
 /**
  * Routes
  */
-const routes = ('/graphqli',
+const routes = ('/',
 graphqlHTTP({
   schema: {},
   graphiql: true,
