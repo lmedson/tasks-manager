@@ -1,5 +1,5 @@
 const { UserType } = require('../../types/');
-const NewUserInput = require('../inputs/UsersInput');
+const { UsersInput, TasksInput } = require('../inputs/');
 const db = require('../../../database/connection');
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
     type: UserType,
     args: {
       input: {
-        type: NewUserInput,
+        type: UsersInput,
       },
     },
     resolve: async (_, { input }) => {
@@ -25,12 +25,81 @@ module.exports = {
     },
   },
 
-  // addTaskToUser: {
-  // },
+  addTaskToUser: {
+    type: UserType,
+    args: {
+      input: {
+        type: TasksInput,
+      },
+    },
+    resolve: async (_, { input }) => {
+      const { id, tasksTodo } = input;
+      const [user] = await db('users')
+        .where({
+          id,
+        })
+        .returning('*');
 
-  // updateTaskFromUser: {
-  // },
+      if (!user) {
+        throw new Error('User does not exists.');
+      }
 
-  // removeTaskFromUser: {
-  // },
+      tasksTodo.map((td) => {
+        if (user.tasksTodo.includes(td)) {
+          throw new Error(`Task ${td} already is registered.`);
+        }
+        user.tasksTodo.push(td);
+
+        return td;
+      });
+
+      await db('users')
+        .where({ id })
+        .update({ tasksTodo: user.tasksTodo })
+        .returning('*');
+
+      return user;
+    },
+  },
+
+  moveTask: {
+    type: UserType,
+    args: {
+      input: {
+        type: TasksInput,
+      },
+    },
+    resolve: async (_, { input }) => {
+      const { id, tasksDone } = input;
+      const [user] = await db('users')
+        .where({
+          id,
+        })
+        .returning('*');
+
+      if (!user) {
+        throw new Error('User does not exists.');
+      }
+
+      tasksDone.map((td) => {
+        if (user.tasksTodo.includes(td)) {
+          const tsk = user.tasksTodo.indexOf(td);
+          user.tasksTodo.splice(tsk, 1);
+        }
+        if (user.tasksDone.includes(td)) {
+          throw new Error(`Task ${td} already moved to Done list.`);
+        }
+
+        user.tasksDone.push(td);
+        return td;
+      });
+
+      await db('users')
+        .where({ id })
+        .update({ tasksDone: user.tasksDone })
+        .returning('*');
+
+      return user;
+    },
+  },
 };
