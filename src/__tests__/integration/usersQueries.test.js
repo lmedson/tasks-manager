@@ -31,7 +31,7 @@ describe('Queries tests', () => {
       .and.be.equal('Leia');
   });
 
-  it('it should be able to get all users', async () => {
+  it('it should be able to get a user by id', async () => {
     const body = {
       query: `
           query GetUser($id: ID!){
