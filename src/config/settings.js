@@ -1,8 +1,5 @@
-const envPath = process.env.NODE_ENV
-  ? `./src/config/.env.${process.env.NODE_ENV}`
-  : './src/config/.env';
-
-require('dotenv').config({ path: envPath });
+// to run migrations
+require('dotenv').config({ path: './src/config/.env' });
 
 const knexfile = require('../database/knexfile');
 

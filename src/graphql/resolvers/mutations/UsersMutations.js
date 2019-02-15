@@ -34,6 +34,7 @@ module.exports = {
     },
     resolve: async (_, { input }) => {
       const { id, tasksTodo } = input;
+
       const [user] = await db('users')
         .where({
           id,
@@ -85,9 +86,6 @@ module.exports = {
         if (user.tasksTodo.includes(td)) {
           const tsk = user.tasksTodo.indexOf(td);
           user.tasksTodo.splice(tsk, 1);
-        }
-        if (user.tasksDone.includes(td)) {
-          throw new Error(`Task ${td} already moved to Done list.`);
         }
 
         user.tasksDone.push(td);

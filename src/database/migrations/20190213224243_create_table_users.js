@@ -4,7 +4,7 @@ exports.up = function (knex, Promise) {
     table.increments();
     table.string('name', 20).notNullable();
     table.integer('age', 3).notNullable();
-    table.enu('gender', ['Masculino', 'Feminino']);
+    table.enu('gender', ['Male', 'Female']);
     table.specificType('tasksTodo', 'text ARRAY');
     table.specificType('tasksDone', 'text ARRAY');
     table.timestamps(true, true);
