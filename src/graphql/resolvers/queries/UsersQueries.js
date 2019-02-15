@@ -9,7 +9,6 @@ module.exports = {
       const users = await db('users')
         .select('*')
         .returning('*');
-      console.log(users);
       return users;
     },
   },

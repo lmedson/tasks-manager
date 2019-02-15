@@ -36,11 +36,11 @@ const Usuario = new GraphQLObjectType({
       type: new GraphQLList(GraphQLString),
       resolve: parent => parent.tasksDone,
     },
-    created_at: {
+    createdAt: {
       type: new GraphQLNonNull(GraphQLDateTime),
       resolve: obj => obj.created_at,
     },
-    updated_at: {
+    updatedAt: {
       type: new GraphQLNonNull(GraphQLDateTime),
       resolve: obj => obj.updated_at,
     },

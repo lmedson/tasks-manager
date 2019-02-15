@@ -8,7 +8,8 @@
   "scripts": {
     "lint": "node_modules/.bin/eslint src/*.js",
     "dev": "nodemon ./src/index.js",
-    "test": "mocha ./src/__tests__/**/*.test.js --exit"
+    "test": "mocha src/__tests__/**/*.test.js --exit",
+    "test:coverage": "nyc mocha src/__tests__/**/*.test.js --exit"
   },
   "dependencies": {
     "dotenv": "^6.2.0",
@@ -36,5 +37,13 @@
       "pre-commit": "npm run lint",
       "pre-push": "npm run test"
     }
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text-summary",
+      "html"
+    ],
+    "report-dir": "src/__tests__/coverage"
   }
 }
