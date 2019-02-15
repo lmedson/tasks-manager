@@ -28,7 +28,7 @@ describe('Queries tests', () => {
     expect(response).to.have.status(200);
     expect(response.body.data.getUsers[0])
       .to.have.property('name')
-      .and.be.equal('Luke');
+      .and.be.equal('Leia');
   });
 
   it('it should be able to get all users', async () => {

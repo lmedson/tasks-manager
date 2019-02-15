@@ -254,39 +254,4 @@ describe('Mutations tests', () => {
       .to.have.property('message')
       .and.have.to.be.equal('User does not exists.');
   });
-
-  // it('it should not be able to move a duplicated tasks in done list', async () => {
-  //   const body = {
-  //     query: `
-  //         mutation($input: TasksInput!){
-  //           moveTask(input:$input) {
-  //               id
-  //               name
-  //               age
-  //               gender
-  //               tasksTodo
-  //               tasksDone
-  //               createdAt
-  //               updatedAt
-  //             }
-  //         }`,
-  //     variables: {
-  //       input: {
-  //         id: 1,
-  //         tasksDone: ['to visit my friends '],
-  //       },
-  //     },
-  //   };
-
-  //   const response = await chai
-  //     .request(server)
-  //     .post('/')
-  //     .set('content-type', 'application/json')
-  //     .send(JSON.stringify(body));
-  //   console.log(response.body);
-  //   expect(response).to.have.status(200);
-  //   expect(response.body.errors[0])
-  //     .to.have.property('message')
-  //     .and.have.to.be.equal('Task to visit my friends already moved to Done list.');
-  // });
 });

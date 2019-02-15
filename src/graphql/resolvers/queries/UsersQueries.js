@@ -8,6 +8,7 @@ module.exports = {
     resolve: async () => {
       const users = await db('users')
         .select('*')
+        .orderBy('id')
         .returning('*');
       return users;
     },
