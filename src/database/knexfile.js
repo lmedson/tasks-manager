@@ -1,7 +1,7 @@
 // Update with your config settings.
+// setup here for tests
 require('dotenv').config({ path: '../config/.env' });
 
-console.log(process.cwd());
 module.exports = {
   client: process.env.DB_CLIENT,
   connection: {
