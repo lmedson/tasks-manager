@@ -7,8 +7,10 @@
   "license": "MIT",
   "scripts": {
     "lint": "node_modules/.bin/eslint src/*.js",
+    "start": "node ./src/index.js",
     "dev": "nodemon ./src/index.js",
-    "test": "mocha src/__tests__/**/*.test.js --exit",
+    "test": "PORT=3001 mocha src/__tests__/**/*.test.js --exit",
+    "makemigrations": "cd src/database/ && knex migrate:rollback && knex migrate:latest && knex seed:run",
     "test:coverage": "nyc mocha src/__tests__/**/*.test.js --exit"
   },
   "dependencies": {
@@ -24,6 +26,7 @@
     "require-dir": "^1.2.0"
   },
   "devDependencies": {
+    "nodemon": "^1.18.9",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "eslint": "^5.13.0",

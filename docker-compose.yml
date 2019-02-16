@@ -1,0 +1,18 @@
+version: "3"
+services:
+  app:
+    image: node:10.13.0
+    volumes:
+      - ./.:/application
+    ports:
+      - "3000:3000"
+    working_dir: /application
+    command: bash -c "npm install && npm run makemigrations && npm run test && npm start"
+    depends_on:
+      - db
+    container_name: api
+  db:
+    image: postgres:10.4-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+    container_name: pg-docker
