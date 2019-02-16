@@ -47,3 +47,72 @@ And, you can access the graphql interface in your browser, by `http://localhost:
 - Second, after of enviroments configurations, and ports set, you can run the aplication with command, `$ docker-compose up`.
 
 - Third, for tests in docker, after run the compose file, you can access the container with app service with `$ docker exec -i -t api /bin/bash`, and in the bash you can run the command for tests, `$ npm test`.
+
+## Quering
+
+```graphql
+
+Creating a user
+  mutation{
+    createUser(input:{
+      name:"Jane",
+      age:32,
+      gender: "Female",
+      tasksTodo:["buy a aw", "buy a house","buy a house","buy a car"],
+    }){
+      id
+      name
+      age
+      tasksTodo
+      tasksDone
+      createdAt
+      updatedAt
+    }
+  }
+
+Adding tasks into user todo list
+  mutation{
+   addTaskToUser(input:{
+      id:2,
+      tasksTodo:["go to class", "feed my cat"],
+  }){
+    tasksTodo
+    tasksDone
+    ...
+  }
+}
+
+Moving tasks into user done list
+  mutation{
+      moveTask(input:{
+        id:2,
+        tasksDone:["wake up at 6h"],
+      }){
+        tasksTodo
+        tasksDone
+        ...
+      }
+    }
+
+Getting all users
+  query{
+    getUsers{
+      id
+      name
+      tasksDone
+      tasksTodo
+      gender
+      ...
+    }
+  }
+
+Getting user by id
+  query{
+    getUserById(id:1){
+      name
+      gender
+      id
+      ...
+    }
+  }
+```
